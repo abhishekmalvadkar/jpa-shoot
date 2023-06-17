@@ -1,0 +1,60 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+package com-jpa-shoot-entity {
+class UserEntity {
+    - id : Long
+
+    - name : String
+
+    - email : String
+
+    - password : String
+
+    + accessorMethods()
+}
+
+class BlogEntity{
+  - id : Long
+
+  - title : String
+
+  - content : String
+
+    @ManyToOne
+  - postedBy : UserEntity
+
+  - lastUpdatedOn : LocalDateTime
+
+  + accessorMethods()
+}
+
+class CommentEntity{
+  - id : Long
+
+  - text : String
+
+  @ManyToOne
+  - blog : BlogEntity
+
+  @ManyToOne
+  - commentedBy : UserEntity
+
+  - lastUpdatedOn : LocalDateTime
+
+  + accessorMethods()
+}
+
+}
+
+
+BlogEntity "use" --> UserEntity
+
+CommentEntity "use" --> UserEntity
+
+CommentEntity "use" -> BlogEntity
+
+
+
+
+
+@enduml
