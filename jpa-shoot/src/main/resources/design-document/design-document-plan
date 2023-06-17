@@ -1,0 +1,62 @@
+====================== Functional Requirement =======================
+
+- As a user, I should be able to create a new account
+- As a user, I should be able to login
+- As a user, I should be able to create a blog
+- As a user, I should be able to update a blog
+- As a user, I should be able to delete a blog
+- As a user, I should be able to view any blog
+- As a user, I should be able to create comment on blog
+- As a user, I should be able to edit comment on blog
+- As a user, I should be able to delete comment on blog
+- As a user, I should be able to see all blogs
+
+NOUNS
+- user
+- blog
+- comment
+
+VERBS
+- createAccount()
+- login()
+- createBlog()
+- updateBlog()
+- deleteBlog()
+- getBlogById()
+- createCommentOnBlog()
+- editComment()
+- deleteComment()
+- getAllBlogsWithPagination()
+
+Database design
+
+users
+- ID
+- NAME
+- EMAIL
+- PASSWORD
+
+blog
+- ID
+- TITLE
+- CONTENT
+- POSTED_BY_ID
+- LAST_UPDATED_ON
+
+comment
+- ID
+- TEXT
+- BLOG_ID
+- COMMENTED_BY_ID
+- LAST_UPDATED_ON
+
+Relationships
+
+1 user can create Many blogs
+1 blog can be created by 1 user only
+
+1 user can do Many comments
+1 comment is done by only 1 user
+
+1 blog can have Many comments
+1 comment is associated with 1 blog only
