@@ -21,6 +21,7 @@ public class BlogRepository {
         this.em.persist(blogEntity);
     }
 
+    @Transactional(readOnly = true)
     public BlogEntity findById(Integer id){
         BlogEntity blogEntity = this.em.find(BlogEntity.class, id);
         return blogEntity;
