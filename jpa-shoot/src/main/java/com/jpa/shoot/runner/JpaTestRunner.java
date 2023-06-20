@@ -3,6 +3,7 @@ package com.jpa.shoot.runner;
 import com.jpa.shoot.entity.BlogEntity;
 import com.jpa.shoot.enums.StatusEnum;
 import com.jpa.shoot.repository.BlogRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Component
+@Slf4j
 public class JpaTestRunner implements CommandLineRunner {
 
     private final BlogRepository blogRepository;
@@ -23,6 +25,12 @@ public class JpaTestRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        Integer blogId = 1;
+        BlogEntity blogEntity = this.blogRepository.findById(blogId);
+        log.info("Blog name :: {}" , blogEntity.getContent());
+    }
+
+    private void entityManagerPersistExample() {
         BlogEntity blogEntity = new BlogEntity();
         blogEntity.setActiveStatus(StatusEnum.ACTIVE);
         blogEntity.setContent("This is spring boot NEW");

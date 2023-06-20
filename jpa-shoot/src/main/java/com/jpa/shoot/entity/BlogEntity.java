@@ -2,6 +2,7 @@ package com.jpa.shoot.entity;
 
 import com.jpa.shoot.enums.StatusEnum;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
@@ -15,6 +16,7 @@ import java.time.LocalTime;
 
 @Entity
 @Setter
+@Getter
 public class BlogEntity {
 
     @Id
