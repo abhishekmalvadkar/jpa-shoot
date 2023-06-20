@@ -15,6 +15,10 @@ public class BlogRepository {
         this.em = em;
     }
 
+    @Transactional
+    public void update(BlogEntity blogEntity){
+        this.em.merge(blogEntity);
+    }
 
     @Transactional
     public void save(BlogEntity blogEntity){

@@ -25,6 +25,12 @@ public class JpaTestRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        BlogEntity blogEntity = this.blogRepository.findById(1);
+        blogEntity.setContent("Updated");
+        this.blogRepository.update(blogEntity);
+    }
+
+    private void entityManagerFindExample() {
         Integer blogId = 1;
         BlogEntity blogEntity = this.blogRepository.findById(blogId);
         log.info("Blog name :: {}" , blogEntity.getContent());
