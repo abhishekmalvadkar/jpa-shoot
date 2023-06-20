@@ -16,6 +16,12 @@ public class BlogRepository {
     }
 
     @Transactional
+    public void deleteById(Integer id){
+        BlogEntity blogEntity = this.em.find(BlogEntity.class, id);
+        this.em.remove(blogEntity);
+    }
+
+    @Transactional
     public void update(BlogEntity blogEntity){
         this.em.merge(blogEntity);
     }

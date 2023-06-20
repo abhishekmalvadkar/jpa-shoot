@@ -25,6 +25,11 @@ public class JpaTestRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        Integer blogId = 1;
+        this.blogRepository.deleteById(blogId);
+    }
+
+    private void entityManagerMergeExample() {
         BlogEntity blogEntity = this.blogRepository.findById(1);
         blogEntity.setContent("Updated");
         this.blogRepository.update(blogEntity);
