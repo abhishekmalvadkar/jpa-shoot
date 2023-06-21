@@ -1,12 +1,15 @@
 package com.jpa.shoot.repository;
 
 import com.jpa.shoot.entity.BlogEntity;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 
 @Repository
+@Slf4j
 public class BlogRepository {
 
     private final EntityManager em;
@@ -14,12 +17,18 @@ public class BlogRepository {
     public BlogRepository(EntityManager em) {
         this.em = em;
     }
-
-    @Transactional
-    public void deleteById(Integer id){
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void deleteById(Integer id) {
         BlogEntity blogEntity = this.em.find(BlogEntity.class, id);
         this.em.remove(blogEntity);
     }
+
+    @Transactional(readOnly = true)
+    public BlogEntity findById(Integer id) {
+        BlogEntity blogEntity = this.em.find(BlogEntity.class, id);
+        return blogEntity;
+    }
+
 
     @Transactional
     public void update(BlogEntity blogEntity){
@@ -31,9 +40,4 @@ public class BlogRepository {
         this.em.persist(blogEntity);
     }
 
-    @Transactional(readOnly = true)
-    public BlogEntity findById(Integer id){
-        BlogEntity blogEntity = this.em.find(BlogEntity.class, id);
-        return blogEntity;
-    }
 }

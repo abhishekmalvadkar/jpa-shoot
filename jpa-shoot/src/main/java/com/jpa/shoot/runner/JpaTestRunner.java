@@ -23,9 +23,11 @@ public class JpaTestRunner implements CommandLineRunner {
         this.blogRepository = blogRepository;
     }
 
+    @Transactional
     @Override
     public void run(String... args) throws Exception {
-        Integer blogId = 1;
+        Integer blogId = 3;
+        BlogEntity blogEntity = this.blogRepository.findById(blogId);
         this.blogRepository.deleteById(blogId);
     }
 
