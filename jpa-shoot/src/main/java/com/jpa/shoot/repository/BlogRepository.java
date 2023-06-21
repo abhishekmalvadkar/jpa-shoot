@@ -14,9 +14,20 @@ public class BlogRepository {
 
     private final EntityManager em;
 
+
+    @Transactional
+    public void persistenceContextBehaviourTesting(BlogEntity blogEntity) {
+        this.em.persist(blogEntity);
+        Integer newBlogId = blogEntity.getId();
+        log.info("New blog id :: {}", newBlogId);
+        BlogEntity savedBlogEntity = this.em.find(BlogEntity.class, newBlogId);
+        savedBlogEntity.setContent("I am changing here");
+    }
+
     public BlogRepository(EntityManager em) {
         this.em = em;
     }
+
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void deleteById(Integer id) {
         BlogEntity blogEntity = this.em.find(BlogEntity.class, id);

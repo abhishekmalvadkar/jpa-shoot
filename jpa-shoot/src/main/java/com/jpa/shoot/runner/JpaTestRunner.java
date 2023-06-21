@@ -23,12 +23,10 @@ public class JpaTestRunner implements CommandLineRunner {
         this.blogRepository = blogRepository;
     }
 
-    @Transactional
     @Override
     public void run(String... args) throws Exception {
-        Integer blogId = 3;
-        BlogEntity blogEntity = this.blogRepository.findById(blogId);
-        this.blogRepository.deleteById(blogId);
+        BlogEntity blogEntity = prepareBlogEntityObject();
+        this.blogRepository.persistenceContextBehaviourTesting(blogEntity);
     }
 
     private void entityManagerMergeExample() {
@@ -44,6 +42,11 @@ public class JpaTestRunner implements CommandLineRunner {
     }
 
     private void entityManagerPersistExample() {
+        BlogEntity blogEntity = prepareBlogEntityObject();
+        this.blogRepository.save(blogEntity);
+    }
+
+    private static BlogEntity prepareBlogEntityObject() {
         BlogEntity blogEntity = new BlogEntity();
         blogEntity.setActiveStatus(StatusEnum.ACTIVE);
         blogEntity.setContent("This is spring boot NEW");
@@ -54,6 +57,6 @@ public class JpaTestRunner implements CommandLineRunner {
         blogEntity.setCreatedDate(LocalDate.now());
         blogEntity.setCreatedTime(LocalTime.now());
         blogEntity.setLastUpdatedOn(LocalDateTime.now());
-        this.blogRepository.save(blogEntity);
+        return blogEntity;
     }
 }
