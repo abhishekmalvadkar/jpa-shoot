@@ -1,0 +1,70 @@
+employee
+- ID
+- NAME
+- START_DATE
+- SALARY
+
+address
+- ID
+- STREET
+- ZIP
+- CITY
+- STATE
+
+[Composition]
+1 Employee can have 1 Address
+1 Address can belongs to 1 Employee
+
+Relationship
+
+Case 1 :
+employee
+- ID(PK)
+- NAME
+- START_DATE
+- SALARY
+
+address
+- ID(PK)
+- STREET
+- ZIP
+- CITY
+- STATE
+- EMP_ID(FK)
+
+Case 2 : [Best In This Case]
+employee
+- ID(PK)
+- NAME
+- START_DATE
+- SALARY
+- ADDRESS_ID(FK)
+
+address
+- ID(PK)
+- STREET
+- ZIP
+- CITY
+- STATE
+
+Case 3 :
+employee
+- ID(PK)
+- NAME
+- START_DATE
+- SALARY
+
+address
+- ID(PK)
+- STREET
+- ZIP
+- CITY
+- STATE
+
+employee_address
+- ID(PK)
+- EMP_ID(FK)
+- ADDRESS_ID(FK)
+
+
+
