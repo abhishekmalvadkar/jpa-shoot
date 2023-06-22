@@ -23,10 +23,16 @@ public class JpaTestRunner implements CommandLineRunner {
         this.blogRepository = blogRepository;
     }
 
+    private void entityManagerPersistExample() {
+        BlogEntity blogEntity = prepareBlogEntityObject();
+        this.blogRepository.save(blogEntity);
+    }
+
+
+
     @Override
     public void run(String... args) throws Exception {
-        BlogEntity blogEntity = prepareBlogEntityObject();
-        this.blogRepository.persistenceContextBehaviourTesting(blogEntity);
+
     }
 
     private void entityManagerMergeExample() {
@@ -41,10 +47,6 @@ public class JpaTestRunner implements CommandLineRunner {
         log.info("Blog name :: {}" , blogEntity.getContent());
     }
 
-    private void entityManagerPersistExample() {
-        BlogEntity blogEntity = prepareBlogEntityObject();
-        this.blogRepository.save(blogEntity);
-    }
 
     private static BlogEntity prepareBlogEntityObject() {
         BlogEntity blogEntity = new BlogEntity();
