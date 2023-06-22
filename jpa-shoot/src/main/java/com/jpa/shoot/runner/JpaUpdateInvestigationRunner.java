@@ -21,14 +21,14 @@ public class JpaUpdateInvestigationRunner implements CommandLineRunner {
     }
 
     @Override
-    /**
-     * Due to @@Transactional annotation on method level PC will start from method start
-     * amd will end at method end
-     * PC state : []
-     */
     public void run(String... args) throws Exception {
     }
 
+    /**
+     * Due to @@Transactional annotation on method level PC will start from method start
+     * and will end at method end
+     * PC state : []
+     */
     @Transactional
     public void updateCaseWithManagedEntityObjectWithTransactionalAnnotationOnCurrentMethod() {
         Integer blogId = 4;
@@ -71,7 +71,7 @@ public class JpaUpdateInvestigationRunner implements CommandLineRunner {
          * PC will start at LINE 22 and will end the same line and dbBlogObject will be detached from PC
          * and will be in detached state
          * because we didn't put @Transactional annotation on
-         * our run method
+         * our method
          */
         BlogEntity dbBlogObject = this.em.find(BlogEntity.class, blogId);
         /**
