@@ -15,6 +15,24 @@ public class BlogRepository {
     private final EntityManager em;
 
 
+    /**
+     * if caller method has @Transactional then it will join it and share the same PC
+     * if caller does not have @Transactional then it will create new PC or transaction
+     * and this PC will be destroyed at the end of this method
+     */
+    @Transactional
+    public void update(BlogEntity blogEntity) {
+        this.em.merge(blogEntity);
+    }
+
+    @Transactional
+    public void save(BlogEntity blogEntity) {
+        log.info("This will print before INSERT query creation");
+        this.em.persist(blogEntity);
+        log.info("This will print after INSERT query prepared");
+    }
+
+
     @Transactional
     public void persistenceContextBehaviourTesting(BlogEntity blogEntity) {
         this.em.persist(blogEntity);
@@ -40,15 +58,5 @@ public class BlogRepository {
         return blogEntity;
     }
 
-
-    @Transactional
-    public void update(BlogEntity blogEntity){
-        this.em.merge(blogEntity);
-    }
-
-    @Transactional
-    public void save(BlogEntity blogEntity){
-        this.em.persist(blogEntity);
-    }
 
 }
