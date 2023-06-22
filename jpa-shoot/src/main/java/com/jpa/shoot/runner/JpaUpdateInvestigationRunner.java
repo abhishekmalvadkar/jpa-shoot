@@ -1,6 +1,7 @@
 package com.jpa.shoot.runner;
 
 import com.jpa.shoot.entity.BlogEntity;
+import com.jpa.shoot.enums.StatusEnum;
 import com.jpa.shoot.repository.BlogRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -22,6 +23,23 @@ public class JpaUpdateInvestigationRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        updateCaseWithSameDatabaseValue();
+    }
+
+    @Transactional
+    public void updateCaseWithSameDatabaseValue() {
+        int blogId = 4;
+        BlogEntity blogEntity = this.blogRepository.findById(blogId);
+        blogEntity.setTitle("Very big title++");
+        blogEntity.setActiveStatus(StatusEnum.ACTIVE);
+
+        /**
+         * If you are trying to set the same database values to the managed entity object then it will
+         * not fire UPDATE query because JPA will compare every property of blog object with its
+         * previous state of blog object(when it is added in PC first time) in PC and if any value finds different with previous state
+         * then only fires UPDATE query otherwise not
+         */
+
     }
 
     /**
