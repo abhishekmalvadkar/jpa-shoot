@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -18,8 +20,19 @@ public class JpaSelectApproachesInvestigationRunner implements CommandLineRunner
 
     @Override
     public void run(String... args) throws Exception {
-        createQueryExampleWithOnlyJpqlQueryAsArgument();
+        createQueryExampleWithJpqlAndResponseTypeAsArgument();
 
+    }
+
+    public void createQueryExampleWithJpqlAndResponseTypeAsArgument() {
+        /**
+         * Here no need to type cast because we have told to JPA the response type class
+         */
+        TypedQuery<BlogEntity> q = this.em.createQuery("SELECT b from BlogEntity b", BlogEntity.class);
+        List<BlogEntity> blogs = q.getResultList();
+        for (BlogEntity blog : blogs) {
+            log.info("Blog :: {}", blog);
+        }
     }
 
     public void createQueryExampleWithOnlyJpqlQueryAsArgument() {
