@@ -4,6 +4,7 @@ import com.jpa.shoot.enums.StatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,6 +18,7 @@ import java.time.LocalTime;
 @Entity
 @Setter
 @Getter
+@ToString
 public class BlogEntity {
 
     @Id

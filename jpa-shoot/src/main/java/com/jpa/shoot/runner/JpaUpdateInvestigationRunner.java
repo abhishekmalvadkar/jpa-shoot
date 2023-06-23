@@ -3,13 +3,17 @@ package com.jpa.shoot.runner;
 import com.jpa.shoot.entity.BlogEntity;
 import com.jpa.shoot.enums.StatusEnum;
 import com.jpa.shoot.repository.BlogRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import java.util.List;
 
 @Component
+@Slf4j
 public class JpaUpdateInvestigationRunner implements CommandLineRunner {
 
     private final EntityManager em;
@@ -23,8 +27,10 @@ public class JpaUpdateInvestigationRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        updateCaseWithSameDatabaseValue();
+
+        
     }
+
 
     @Transactional
     public void updateCaseWithSameDatabaseValue() {
