@@ -10,6 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Component
@@ -20,13 +24,19 @@ public class JpaEntityManagerMethodsInvestigationRunner implements CommandLineRu
     private final EntityManager em;
 
     @Override
-    @Transactional
     public void run(String... args) throws Exception {
 
-        createQueryExampleWithBulkUpdateCase();
+        TypedQuery<BlogEntity> q = this.em.createNamedQuery("fetchAllBlogs", BlogEntity.class);
+        List<BlogEntity> blogs = q.getResultList();
+        for (BlogEntity blog : blogs) {
+            log.info("Blog :: {}", blog);
+        }
+
+
     }
 
-    private void createQueryExampleWithBulkUpdateCase() {
+    @Transactional
+    public void createQueryExampleWithBulkUpdateCase() {
         /**
          * Suppose from UI user will select multiple blogs using checkboxes and those
          * blogs he wants to make private so let's see how we can handle this bulk update

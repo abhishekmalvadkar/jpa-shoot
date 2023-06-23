@@ -6,10 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -19,6 +16,7 @@ import java.time.LocalTime;
 @Setter
 @Getter
 @ToString
+@NamedQuery(name = "fetchAllBlogs" , query = "SELECT b from BlogEntity b")
 public class BlogEntity {
 
     @Id
