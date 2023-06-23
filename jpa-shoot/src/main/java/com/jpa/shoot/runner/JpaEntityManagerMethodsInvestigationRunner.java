@@ -25,14 +25,25 @@ public class JpaEntityManagerMethodsInvestigationRunner implements CommandLineRu
 
     @Override
     public void run(String... args) throws Exception {
+        multipleNamedQueryExample();
 
+
+    }
+
+    public void multipleNamedQueryExample() {
+        int blogId = 11;
+        TypedQuery<BlogEntity> q = this.em.createNamedQuery("fetchBlogById", BlogEntity.class);
+        q.setParameter("id" , blogId);
+        BlogEntity blog = q.getSingleResult();
+        log.info("Blog title : {}" , blog.getTitle());
+    }
+
+    public void singleNamedQueryExample() {
         TypedQuery<BlogEntity> q = this.em.createNamedQuery("fetchAllBlogs", BlogEntity.class);
         List<BlogEntity> blogs = q.getResultList();
         for (BlogEntity blog : blogs) {
             log.info("Blog :: {}", blog);
         }
-
-
     }
 
     @Transactional

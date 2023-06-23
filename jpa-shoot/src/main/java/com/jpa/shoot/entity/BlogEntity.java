@@ -17,6 +17,7 @@ import java.time.LocalTime;
 @Getter
 @ToString
 @NamedQuery(name = "fetchAllBlogs" , query = "SELECT b from BlogEntity b")
+@NamedQuery(name = "fetchBlogById" , query = "SELECT b from BlogEntity b WHERE b.id = :id")
 public class BlogEntity {
 
     @Id
