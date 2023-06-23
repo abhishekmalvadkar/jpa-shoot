@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -14,14 +15,27 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class JpaSelectApproachesInvestigationRunner implements CommandLineRunner {
+public class JpaEntityManagerMethodsInvestigationRunner implements CommandLineRunner {
 
     private final EntityManager em;
 
     @Override
+    @Transactional
     public void run(String... args) throws Exception {
-        createQueryExampleWithJpqlAndResponseTypeAsArgument();
+        createQueryWithBulkUpdateExample();
+    }
 
+    public void createQueryWithBulkUpdateExample() {
+        /**
+         * Suppose from UI user will select multiple blogs using checkboxes and those
+         * blogs he wants to delete then how we can handle that bulk delete operation let
+         * us see
+         */
+        List<Integer> blogIdsToBeDeleted = List.of(8, 9, 10);
+        Query q = this.em.createQuery("DELETE FROM BlogEntity b WHERE b.id IN :blogIds");
+        q.setParameter("blogIds", blogIdsToBeDeleted);
+        int noOfBlogsDeleted = q.executeUpdate();
+        log.info("{} of blogs deleted successfully", noOfBlogsDeleted);
     }
 
     public void createQueryExampleWithJpqlAndResponseTypeAsArgument() {
