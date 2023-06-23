@@ -22,9 +22,24 @@ public class JpaEntityManagerMethodsInvestigationRunner implements CommandLineRu
     @Override
     @Transactional
     public void run(String... args) throws Exception {
-        createQueryWithBulkUpdateExample();
+
+        createQueryExampleWithBulkUpdateCase();
     }
 
+    private void createQueryExampleWithBulkUpdateCase() {
+        /**
+         * Suppose from UI user will select multiple blogs using checkboxes and those
+         * blogs he wants to make private so let's see how we can handle this bulk update
+         *
+         */
+        List<Integer> blogIdsToBeMakePrivate = List.of(11 , 12 , 13);
+        Query q = this.em.createQuery("UPDATE BlogEntity b SET b.isPrivate=true WHERE b.id IN :blogIds");
+        q.setParameter("blogIds" , blogIdsToBeMakePrivate);
+        int noOgBlogsUpdated = q.executeUpdate();
+        log.info("{} no of blogs updated successfully" , noOgBlogsUpdated);
+    }
+
+    @Transactional
     public void createQueryWithBulkUpdateExample() {
         /**
          * Suppose from UI user will select multiple blogs using checkboxes and those
