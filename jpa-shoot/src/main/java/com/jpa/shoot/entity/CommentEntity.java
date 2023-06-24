@@ -16,7 +16,7 @@ public class CommentEntity {
 
     private String text;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private BlogEntity blogEntity;
 
 }

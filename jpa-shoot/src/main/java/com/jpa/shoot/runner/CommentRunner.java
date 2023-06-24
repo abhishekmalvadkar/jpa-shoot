@@ -24,16 +24,30 @@ public class CommentRunner implements CommandLineRunner {
     @Transactional
     public void run(String... args) throws Exception {
 
+        
     }
 
-    private void commentPersistExample() {
+    private void commentUpdateExample() {
+        Integer commentId = 1;
+        String newCommentText = "Very Bad Blog";
+
+        CommentEntity commentEntity = this.em.find(CommentEntity.class, commentId);
+        if (Objects.nonNull(commentEntity)){
+            commentEntity.setText(newCommentText);
+        } else {
+            throw new RecordNotFoundException("Comment does not exists with id : " + commentId);
+        }
+    }
+
+    @Transactional
+    public void commentPersistExample() {
         Integer blogId = 25;
         BlogEntity blogEntity = this.blogRepository.findById(blogId);
         if (Objects.isNull(blogEntity)){
             throw new RecordNotFoundException("Blog does not exists with id : " + blogId);
         }
         CommentEntity commentEntity = new CommentEntity();
-        commentEntity.setText("Nice blog");
+        commentEntity.setText("Very Good Explanation");
         commentEntity.setBlogEntity(blogEntity);
 
         this.em.persist(commentEntity);
