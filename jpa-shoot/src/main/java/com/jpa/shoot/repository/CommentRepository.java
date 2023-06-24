@@ -42,7 +42,7 @@ public class CommentRepository {
          *
          * Logic => (PageSize * PageNo) - PageSize
          */
-        int skipRecords = (pageSize * pageNumber) - pageSize;
+        int skipRecords = (pageSize * pageNumber) - pageSize; // like offset in sql query
         q.setFirstResult(skipRecords);
         q.setMaxResults(pageSize);
 
