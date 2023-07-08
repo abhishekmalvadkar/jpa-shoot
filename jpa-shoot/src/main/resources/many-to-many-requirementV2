@@ -1,0 +1,42 @@
+Many to Many requirement where cascading is not required
+
+student
+- ID
+- NAME
+
+course
+- ID
+- NAME
+- PRICE
+
+student_course
+- ID
+- STUDENT_ID
+- COURSE_ID
+- ENROLLED_DATE_TIME
+
+Relationships
+
+1 student can enroll for Many courses
+1 course can be enrolled by Many students
+
+
+
+
+
+Cascading is required?
+- No, because both will have their separate CRUD both are having composition
+  relationship but not aggregation
+- So that's why we will create separate table as well as separate entity for 3rd
+  join table (student_course)
+
+Scenarios
+
+Case 1 :
+
+1) Course has been added by admin
+2) Student came and register into application
+3) Student will enroll for a particular course
+
+Requirement
+- As a teacher show me all the students who and when enrolled my this course
