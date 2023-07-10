@@ -20,9 +20,13 @@ Relationships
 1 student can enroll for Many courses
 1 course can be enrolled by Many students
 
+Enrolment
+- ID
+- ENROLLED_DATE_TIME
 
 
-
+one student can have many en
+1 enroment one studnet
 
 Cascading is required?
 - No, because both will have their separate CRUD both are having composition
